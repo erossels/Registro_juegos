@@ -7,6 +7,8 @@
     <tr>
       <th>Name</th>
       <th>Rules</th>
+      <th>Board Image</th>
+      <th>Other Images</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +17,26 @@
     <% @boardgames.each do |boardgame| %>
       <tr>
         <td><%= boardgame.name %></td>
-        <td><%= boardgame.rules %></td>
+        <td>
+          <%= boardgame.rules %> 
+          <%= link_to rails_blob_path(boardgame.rulebook, disposition: 'attachment') do %>
+            <small><i class="fa fa-download"></i></small>
+          <% end  %>
+        </td>
+        <td>
+          <%= link_to rails_blob_path(boardgame.boardimage, disposition: 'attachment') do %>
+            <%= image_tag boardgame.boardimage.variant(resize: "100x100", colorspace: "Gray") %>
+            <small><i class="fa fa-download"></i></small>
+          <% end  %>
+        </td>
+        <td>
+          <% boardgame.boardgameparts.each do |board| %>
+            <%= link_to rails_blob_path(board, disposition: 'attachment') do %>
+              <%= image_tag board.variant(resize: "100x100", colorspace: "Gray") %>
+              <small><i class="fa fa-download"></i></small>
+            <% end %>
+          <% end  %>
+        </td>
         <td><%= link_to 'Show', boardgame %></td>
         <td><%= link_to 'Edit', edit_boardgame_path(boardgame) %></td>
         <td><%= link_to 'Destroy', boardgame, method: :delete, data: { confirm: 'Are you sure?' } %></td>

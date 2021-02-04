@@ -21,6 +21,21 @@
     <%= form.text_area :rules %>
   </div>
 
+  <div class="field">
+    <%= form.label :rulebook, 'Upload rulebook as pdf' %>
+    <%= form.file_field :rulebook %>
+  </div>
+
+  <div class="field">
+    <%= form.label :boardimage, "Add photo of the game's box"%>
+    <%= form.file_field :boardimage %>
+  </div>
+
+  <div class="field">
+    <%= form.label :boardgameparts, 'Add other photos of the game' %>
+    <%= form.file_field :boardgameparts, multiple: true %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
